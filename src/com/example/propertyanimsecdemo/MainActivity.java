@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {				
 				valueAnimator.start();
-				
+				//第二个属性动画效果，逐渐变大
 				ObjectAnimator anim1 = ObjectAnimator.ofFloat(flower, "scaleX",
 						1.0f, 2f);
 				ObjectAnimator anim2 = ObjectAnimator.ofFloat(flower, "scaleY",
@@ -59,12 +59,13 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation) {
+                //在次对目标view做修改
 				PointF pointF = (PointF)animation.getAnimatedValue();
 				flower.setX(pointF.x-flower.getWidth()/2);
 				flower.setY(pointF.y-flower.getHeight()/2);
 			}
 		});
-//		valueAnimator.setTarget(flower);
+//		valueAnimator.setTarget(flower);  该方法目前不知道有何作用
 		valueAnimator.addListener(new AnimatorListener() {
 			
 			@Override
@@ -103,14 +104,14 @@ public class MainActivity extends Activity {
 			float oneMinusT = 1.0f - t;
 			PointF point = new PointF();	//返回计算好的点
 			
-			PointF point0 = (PointF)startValue;	//开始出现的点
+			PointF point0 = (PointF)startValue;	//开始起点
 			
 			PointF point1 = new PointF();	//贝塞尔曲线控制点
 			point1.set(480, 30);
 			
 			PointF point3 = (PointF)endValue;	//结束终点
 			
-			//B0(t) = (1-t)2P0 + 2(1-t)tC1 + t2P1    (0 ≤ t ≤ 1) 二次贝塞尔曲线方程
+			//B0(t) = (1-t)2P0 + 2(1-t)tC1 + t2P1    (0 ≤ t ≤ 1) 根据二次贝塞尔曲线方程计算，可在网上查找该方程公式，根据需求更改
 			
 			point.x = oneMinusT*oneMinusT*(point0.x)+2*oneMinusT*t*(point1.x)+t*t*(point3.x);
 			point.y = oneMinusT*oneMinusT*(point0.y)+2*oneMinusT*t*(point1.y)+t*t*(point3.y);

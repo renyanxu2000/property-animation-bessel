@@ -9,7 +9,7 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-
+//画一个贝塞尔曲线轨迹背景
 public class BezierCurveView extends View{
 	
 	private static final String TAG = "com.example.propertyanimsecdemo.BezierCurveView";
