@@ -23,7 +23,6 @@ public class MainActivity extends Activity {
 
 	private ValueAnimator valueAnimator;
 	
-
 	private ImageView flower;
 
 	
