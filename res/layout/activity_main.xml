@@ -1,0 +1,25 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <com.example.propertyanimsecdemo.BezierCurveView 
+        android:id="@+id/bezierView"        
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    
+    <Button
+        android:id="@+id/button1"        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="B" />       
+    
+    <ImageView 
+        android:id="@+id/flower"
+        android:src="@drawable/flower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+</FrameLayout>
