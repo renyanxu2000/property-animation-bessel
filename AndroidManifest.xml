@@ -22,6 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.propertyanimsecdemo.LandscapeActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:label="@string/title_activity_landscape" >
+        </activity>
+        <activity
+            android:name="com.example.propertyanimsecdemo.VerticalActivity"
+            android:label="@string/title_activity_vertical" >
+        </activity>
     </application>
 
 </manifest>
