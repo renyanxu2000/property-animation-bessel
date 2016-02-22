@@ -10,3 +10,31 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+.classpath
+
+.project
+
+bin/AndroidManifest.xml
+
+bin/classes.dex
+
+bin/AndroidManifest.xml
+
+bin/classes.dex
+
+gen/com/example/propertyanimsecdemo/R.java
+
+bin/resources.ap_
+
+bin/res/crunch/drawable-xhdpi/ic_launcher.png
+
+bin/res/crunch/drawable-xhdpi/flower.png
+
+bin/res/crunch/drawable-mdpi/ic_launcher.png
+
+bin/res/crunch/drawable-hdpi/ic_launcher.png
+
+bin/PropertyAnimSecDemo.apk
+
+bin/jarlist.cache
