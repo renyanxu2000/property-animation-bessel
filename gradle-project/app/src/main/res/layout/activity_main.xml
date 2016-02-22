@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <Button 
+        android:id="@+id/bezier_vertical_ValueAnimator"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="二次贝塞尔曲线-竖屏"
+        />
+    <Button 
+        android:id="@+id/bezier_landscape_ValueAnimator"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="二次贝塞尔曲线-横屏"
+        />
+    
+    
+</LinearLayout>

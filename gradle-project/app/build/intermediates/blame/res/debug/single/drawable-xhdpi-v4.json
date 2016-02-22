@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/renyanxu/android/GradleWorkspace/Property-Animation-Bessel-curve/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/flower.png",
+        "source": "/Users/renyanxu/android/GradleWorkspace/Property-Animation-Bessel-curve/app/src/main/res/drawable-xhdpi/flower.png"
+    },
+    {
+        "merged": "/Users/renyanxu/android/GradleWorkspace/Property-Animation-Bessel-curve/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_launcher.png",
+        "source": "/Users/renyanxu/android/GradleWorkspace/Property-Animation-Bessel-curve/app/src/main/res/drawable-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/renyanxu/android/GradleWorkspace/Property-Animation-Bessel-curve/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/lus.png",
+        "source": "/Users/renyanxu/android/GradleWorkspace/Property-Animation-Bessel-curve/app/src/main/res/drawable-xhdpi/lus.png"
+    },
+    {
+        "merged": "/Users/renyanxu/android/GradleWorkspace/Property-Animation-Bessel-curve/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/icon_xiao_hua.png",
+        "source": "/Users/renyanxu/android/GradleWorkspace/Property-Animation-Bessel-curve/app/src/main/res/drawable-xhdpi/icon_xiao_hua.png"
+    }
+]
