@@ -11,6 +11,17 @@ old-project/bin/MainActivity.apk
 
 gradle-project/build/generated/mockable-android-21.jar
 
-gradle-project/build/generated/mockable-android-21.jar
-
 gradle-project/build/intermediates/dex-cache/cache.xml
+
+gradle-project/.gradle/2.10/taskArtifacts/cache.properties
+
+gradle-project/.gradle/2.10/taskArtifacts/cache.properties.lock
+
+gradle-project/.idea/.name
+
+gradle-project/.gradle/2.10/taskArtifacts/*.bin
+
+gradle-project/.idea/*
+
+gradle-project/app/build/*
+
