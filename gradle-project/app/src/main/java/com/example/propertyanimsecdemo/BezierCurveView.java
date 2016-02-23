@@ -47,7 +47,7 @@ public class BezierCurveView extends View{
 	}
 		
 	public void onDraw(Canvas canvas){
-		canvas.drawColor(Color.WHITE);
+		canvas.drawColor(Color.TRANSPARENT);
 		mPath.reset();
 		mPath.moveTo(mWidth/2, mHeight);	//开始起点
 		mPath.quadTo(mWidth/2+600, mHeight/3-100, mWidth/2, mHeight/3);	//控制点，终点

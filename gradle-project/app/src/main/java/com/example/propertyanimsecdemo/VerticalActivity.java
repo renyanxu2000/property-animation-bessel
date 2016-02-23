@@ -10,6 +10,7 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.Activity;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -17,7 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class VerticalActivity extends Activity {
+public class VerticalActivity extends AppCompatActivity {
 
     protected static final String TAG = "VerticalActivity";
     private ImageView mFlower;
