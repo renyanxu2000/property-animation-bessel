@@ -11,7 +11,6 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.Activity;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.transition.Visibility;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,68 +19,65 @@ import android.widget.ImageView;
 
 public class LandscapeActivity extends Activity {
 	protected static final String TAG = "LandscapeActivity";
-	private ImageView flower;
-	private ValueAnimator valueAnimator;
-	private ImageView number;
+	private ImageView mFlowerImg;
+	private ValueAnimator mValueAnimator;
+	private ImageView mNumberImg;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_landscape);
 		
 		
-		flower = (ImageView) findViewById(R.id.flower);
-		number = (ImageView) findViewById(R.id.number_im);
+		mFlowerImg = (ImageView) findViewById(R.id.flower);
+		mNumberImg = (ImageView) findViewById(R.id.number_im);
 		
 		final Button button = (Button) findViewById(R.id.button1);		
 		button.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {				
 				
-				ObjectAnimator anim1 = ObjectAnimator.ofFloat(flower, "scaleX",
-						1.0f, 2f);
-				ObjectAnimator anim2 = ObjectAnimator.ofFloat(flower, "scaleY",
-						1.0f, 2f);
+				ObjectAnimator anim1 = ObjectAnimator.ofFloat(mFlowerImg, "scaleX", 1.0f, 2f);
+				ObjectAnimator anim2 = ObjectAnimator.ofFloat(mFlowerImg, "scaleY", 1.0f, 2f);
 				AnimatorSet animSet = new AnimatorSet();
-				animSet.play(anim1).with(anim2).with(valueAnimator);
+				animSet.play(anim1).with(anim2).with(mValueAnimator);
 				animSet.setDuration(1500);
 				animSet.start();
-				
-				
+
 			}
 		});
-		valueAnimator = ValueAnimator.ofObject(new BezierEvaluator(),new PointF(883,215), new PointF(432,215));//第一个pointF：开始点，第二个PointF：终点
-		valueAnimator.addUpdateListener(new AnimatorUpdateListener() {			
+		mValueAnimator = ValueAnimator.ofObject(new BezierEvaluator(),new PointF(883,215), new PointF(432,215));//第一个pointF：开始点，第二个PointF：终点
+		mValueAnimator.addUpdateListener(new AnimatorUpdateListener() {
 			
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation) {
 				PointF pointF = (PointF)animation.getAnimatedValue();
-				flower.setX(pointF.x-flower.getWidth()/2);
-				flower.setY(pointF.y-flower.getHeight()/2);
+				mFlowerImg.setX(pointF.x- mFlowerImg.getWidth()/2);
+				mFlowerImg.setY(pointF.y- mFlowerImg.getHeight()/2);
 			}
 		});
-		valueAnimator.addListener(new AnimatorListenerAdapter() {
+		mValueAnimator.addListener(new AnimatorListenerAdapter() {
 			
 			@Override
 			public void onAnimationStart(Animator animation) {
 				Log.i(TAG, "onAnimationStart");
-				flower.setVisibility(View.VISIBLE);
+				mFlowerImg.setVisibility(View.VISIBLE);
 			}
 			
 			@Override
 			public void onAnimationEnd(Animator animation) {
 				Log.i(TAG, "onAnimationEnd");
-				flower.setVisibility(View.GONE);
+				mFlowerImg.setVisibility(View.GONE);
 				
-				number.setVisibility(View.VISIBLE);
+				mNumberImg.setVisibility(View.VISIBLE);
 				
 				//数字加1动画：位移动画从指定坐标点移动到指定目标坐标点，并带有透明度变化
-				PropertyValuesHolder ofFloaty = PropertyValuesHolder.ofFloat("y", 215-flower.getHeight()/2,215-flower.getHeight()/2-50f);//Y坐标轴：第二个参数是起始点，第三个是结束点坐标，下行X轴同理
-				PropertyValuesHolder ofFloatx = PropertyValuesHolder.ofFloat("x", getResources().getDisplayMetrics().widthPixels/2+flower.getWidth()/2,getResources().getDisplayMetrics().widthPixels/2+flower.getWidth()/2);
+				PropertyValuesHolder ofFloaty = PropertyValuesHolder.ofFloat("y", 215- mFlowerImg.getHeight()/2,215- mFlowerImg.getHeight()/2-50f);//Y坐标轴：第二个参数是起始点，第三个是结束点坐标，下行X轴同理
+				PropertyValuesHolder ofFloatx = PropertyValuesHolder.ofFloat("x", getResources().getDisplayMetrics().widthPixels/2+ mFlowerImg.getWidth()/2,getResources().getDisplayMetrics().widthPixels/2+ mFlowerImg.getWidth()/2);
 				PropertyValuesHolder ofFloat = PropertyValuesHolder.ofFloat("alpha", 1f,0.1f);//透明度，过渡到0.1f透明度
-				ObjectAnimator animEnd = ObjectAnimator.ofPropertyValuesHolder(number,ofFloatx,ofFloaty,ofFloat);//创建objectAnimator对象
+				ObjectAnimator animEnd = ObjectAnimator.ofPropertyValuesHolder(mNumberImg,ofFloatx,ofFloaty,ofFloat);//创建objectAnimator对象
 				//目标对象变大，从X轴方向和Y轴方向
-				ObjectAnimator x = ObjectAnimator.ofFloat(number, "scaleX",1.0f, 1.3f);
-				ObjectAnimator y = ObjectAnimator.ofFloat(number, "scaleY",1.0f, 1.3f);
+				ObjectAnimator x = ObjectAnimator.ofFloat(mNumberImg, "scaleX",1.0f, 1.3f);
+				ObjectAnimator y = ObjectAnimator.ofFloat(mNumberImg, "scaleY",1.0f, 1.3f);
 				//动画集合，把多个动画组合到一起
 				AnimatorSet set = new AnimatorSet();
 				set.play(animEnd).with(x).with(y);
@@ -90,7 +86,7 @@ public class LandscapeActivity extends Activity {
 				set.addListener(new AnimatorListenerAdapter() {
 					@Override
 					public void onAnimationEnd(Animator animation) {
-						number.setVisibility(View.GONE);
+						mNumberImg.setVisibility(View.GONE);
 					}
 				});
 			}
@@ -100,22 +96,21 @@ public class LandscapeActivity extends Activity {
 	class BezierEvaluator implements TypeEvaluator<PointF>{
 
 		@Override
-		public PointF evaluate(float fraction, PointF startValue,
-				PointF endValue) {
+		public PointF evaluate(float fraction, PointF startValue, PointF endValue) {
 			final float t = fraction;	
 			Log.e(TAG, "fraction:"+fraction);
 			float oneMinusT = 1.0f - t;
 			PointF point = new PointF();	//返回计算好的点
 			
-			PointF point0 = (PointF)startValue;	//开始出现的点
+			PointF point0 = startValue;	//开始出现的点
 			
 			PointF point1 = new PointF();	//贝塞尔曲线控制点
-			point1.set(getResources().getDisplayMetrics().widthPixels/2-flower.getWidth(), 20);
+			point1.set(getResources().getDisplayMetrics().widthPixels/2- mFlowerImg.getWidth(), 20);
 			
-			Log.i(TAG, "111x:"+(getResources().getDisplayMetrics().widthPixels/2-flower.getWidth()));
-			Log.i(TAG, "111hhhhh:"+number.getHeight());
+			Log.i(TAG, "111x:"+(getResources().getDisplayMetrics().widthPixels/2- mFlowerImg.getWidth()));
+			Log.i(TAG, "111hhhhh:"+ mNumberImg.getHeight());
 			
-			PointF point3 = (PointF)endValue;	//结束终点
+			PointF point3 = endValue;	//结束终点
 			
 			//B0(t) = (1-t)2P0 + 2(1-t)tC1 + t2P1    (0 ≤ t ≤ 1) 二次贝塞尔曲线方程
 			

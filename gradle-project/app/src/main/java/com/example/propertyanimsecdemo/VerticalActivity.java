@@ -99,12 +99,12 @@ public class VerticalActivity extends Activity {
 			float oneMinusT = 1.0f - t;
 			PointF point = new PointF();	//返回计算好的点
 			
-			PointF point0 = (PointF)startValue;	//开始出现的点
+			PointF point0 = startValue;	//开始出现的点
 			
 			PointF point1 = new PointF();	//贝塞尔曲线控制点
 			point1.set(480, 30);//  324,893), new PointF(270,193)
 			
-			PointF point3 = (PointF)endValue;	//结束终点
+			PointF point3 = endValue;	//结束终点
 			
 			//B0(t) = (1-t)2P0 + 2(1-t)tC1 + t2P1    (0 ≤ t ≤ 1) 二次贝塞尔曲线方程
 			

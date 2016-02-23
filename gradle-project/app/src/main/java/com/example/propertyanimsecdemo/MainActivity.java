@@ -10,14 +10,13 @@ import android.widget.Button;
 public class MainActivity extends Activity implements OnClickListener{
 	
 	private static final String TAG = "MainActivity";
-	private Intent intent;
+	private Intent mIntent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);				
-		
-		
+
 		initView();
 	}
 
@@ -27,7 +26,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		
 		bezierVerticalValueAnimator.setOnClickListener(this);
 		bezierLanscapeValueAnimator.setOnClickListener(this);
-		
 	}
 
 	@Override
@@ -35,12 +33,12 @@ public class MainActivity extends Activity implements OnClickListener{
 		
 		switch (v.getId()) {
 		case R.id.bezier_vertical_ValueAnimator:
-			intent = new Intent(this, VerticalActivity.class);
-			startActivity(intent);
+			mIntent = new Intent(this, VerticalActivity.class);
+			startActivity(mIntent);
 			break;
 		case R.id.bezier_landscape_ValueAnimator:
-			intent = new Intent(this, LandscapeActivity.class);
-			startActivity(intent);
+			mIntent = new Intent(this, LandscapeActivity.class);
+			startActivity(mIntent);
 			break;
 
 		}

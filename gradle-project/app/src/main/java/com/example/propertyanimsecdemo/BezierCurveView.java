@@ -14,9 +14,8 @@ public class BezierCurveView extends View{
 	
 	private static final String TAG = "com.example.propertyanimsecdemo.BezierCurveView";
 		
-	private Paint paint;
-	
-	private Path path;
+	private Paint mPaint;
+	private Path mPath;
 	
 	public BezierCurveView(Context context, AttributeSet attrs){
 		super(context,attrs);
@@ -29,13 +28,13 @@ public class BezierCurveView extends View{
 	}
 	
 	private void init(){		
-		paint = new Paint();
-		paint.setColor(Color.RED);
-		paint.setAntiAlias(true);
-		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(1);
+		mPaint = new Paint();
+		mPaint.setColor(Color.RED);
+		mPaint.setAntiAlias(true);
+		mPaint.setStyle(Style.STROKE);
+		mPaint.setStrokeWidth(1);
 		
-		path = new Path();
+		mPath = new Path();
 	}
 	
 	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
@@ -45,10 +44,10 @@ public class BezierCurveView extends View{
 		
 	public void onDraw(Canvas canvas){
 		canvas.drawColor(Color.WHITE);
-		path.reset();
-		path.moveTo(324, 893);
-		path.quadTo(480, 30, 270, 192);
-		canvas.drawPath(path, paint);
+		mPath.reset();
+		mPath.moveTo(324, 893);
+		mPath.quadTo(480, 30, 270, 192);
+		canvas.drawPath(mPath, mPaint);
 	}
 
 }

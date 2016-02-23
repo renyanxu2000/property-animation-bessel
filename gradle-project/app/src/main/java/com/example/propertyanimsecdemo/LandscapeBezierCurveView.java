@@ -14,9 +14,9 @@ public class LandscapeBezierCurveView extends View{
 	
 	private static final String TAG = "com.example.propertyanimsecdemo.BezierCurveView";
 		
-	private Paint paint;
+	private Paint mPaint;
 	
-	private Path path;
+	private Path mPath;
 	
 	public LandscapeBezierCurveView(Context context, AttributeSet attrs){
 		super(context,attrs);
@@ -29,26 +29,27 @@ public class LandscapeBezierCurveView extends View{
 	}
 	
 	private void init(){		
-		paint = new Paint();
-		paint.setColor(Color.RED);
-		paint.setAntiAlias(true);
-		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(1);
+		mPaint = new Paint();
+		mPaint.setColor(Color.RED);
+		mPaint.setAntiAlias(true);
+		mPaint.setStyle(Style.STROKE);
+		mPaint.setStrokeWidth(1);
 		
-		path = new Path();
+		mPath = new Path();
 	}
 	
 	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		Log.v(TAG, "width = " + MeasureSpec.getSize(widthMeasureSpec) + "| height = " + MeasureSpec.getSize(heightMeasureSpec));
+		Log.i(TAG, "width = " + MeasureSpec.getSize(widthMeasureSpec)
+				+ "| height = " + MeasureSpec.getSize(heightMeasureSpec));
 	}
 		
 	public void onDraw(Canvas canvas){
 		canvas.drawColor(Color.WHITE);
-		path.reset();
-		path.moveTo(883, 215);		//开始起点
-		path.quadTo(432, 20, 432, 215);	// 控制点、终点
-		canvas.drawPath(path, paint);
+		mPath.reset();
+		mPath.moveTo(883, 215);		//开始起点
+		mPath.quadTo(432, 20, 432, 215);	// 控制点、终点
+		canvas.drawPath(mPath, mPaint);
 	}
 
 }
