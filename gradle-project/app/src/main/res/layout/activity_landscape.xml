@@ -8,15 +8,30 @@
 
     <com.example.propertyanimsecdemo.LandscapeBezierCurveView
         android:id="@+id/bezierView"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/send_flowers_bt"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
-        android:text="  送花  " />
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/send_flowers_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="  送花  " />
+
+        <Button
+            android:id="@+id/show_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="贝塞尔曲线" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/flower"

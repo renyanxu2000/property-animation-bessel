@@ -36,6 +36,15 @@ public class LandscapeActivity extends Activity {
 
 
         final Button sendFlowers = (Button) findViewById(R.id.send_flowers_bt);
+        final View lineView = findViewById(R.id.bezierView);
+
+        Button showLine = (Button) findViewById(R.id.show_bt);
+        showLine.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lineView.setVisibility(lineView.isShown()?View.GONE:View.VISIBLE);
+            }
+        });
         sendFlowers.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
