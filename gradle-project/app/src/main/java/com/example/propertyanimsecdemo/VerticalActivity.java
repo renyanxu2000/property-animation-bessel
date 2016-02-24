@@ -20,7 +20,7 @@ import android.widget.ImageView;
 
 public class VerticalActivity extends AppCompatActivity {
 
-    protected static final String TAG = "VerticalActivity";
+    protected static final String TAG = VerticalActivity.class.getSimpleName();
     private ImageView mFlower;
     private ValueAnimator mValueAnimator;
     private View mBezierView;
@@ -124,10 +124,7 @@ public class VerticalActivity extends AppCompatActivity {
 
         @Override
         public PointF evaluate(float fraction, PointF startValue, PointF endValue) {
-            final float t = fraction;
-//			Log.i(TAG, "fraction:"+fraction);
-            float oneMinusT = 1.0f - t;
-            PointF point = new PointF();    //返回计算好的点
+            float oneMinusT = 1.0f - fraction;
 
             //startValue:	开始出现的点
             //endValue:	    结束终点
@@ -138,8 +135,9 @@ public class VerticalActivity extends AppCompatActivity {
 
             //B0(t) = (1-t)2P0 + 2(1-t)tC1 + t2P1    (0 ≤ t ≤ 1) 二次贝塞尔曲线方程
 
-            point.x = oneMinusT * oneMinusT * (startValue.x) + 2 * oneMinusT * t * (controlPoint.x) + t * t * (endValue.x);
-            point.y = oneMinusT * oneMinusT * (startValue.y) + 2 * oneMinusT * t * (controlPoint.y) + t * t * (endValue.y);
+            PointF point = new PointF();    //返回计算好的点
+            point.x = oneMinusT * oneMinusT * (startValue.x) + 2 * oneMinusT * fraction * (controlPoint.x) + fraction * fraction * (endValue.x);
+            point.y = oneMinusT * oneMinusT * (startValue.y) + 2 * oneMinusT * fraction * (controlPoint.y) + fraction * fraction * (endValue.y);
             return point;
         }
     }

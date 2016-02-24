@@ -10,46 +10,49 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-public class LandscapeBezierCurveView extends View{
-	
-	private static final String TAG = "com.example.propertyanimsecdemo.BezierCurveView";
-		
-	private Paint mPaint;
-	
-	private Path mPath;
-	
-	public LandscapeBezierCurveView(Context context, AttributeSet attrs){
-		super(context,attrs);
-		init();
-	}
-	
-	public LandscapeBezierCurveView(Context context){
-		super(context);
-		init();
-	}
-	
-	private void init(){		
-		mPaint = new Paint();
-		mPaint.setColor(Color.RED);
-		mPaint.setAntiAlias(true);
-		mPaint.setStyle(Style.STROKE);
-		mPaint.setStrokeWidth(1);
-		
-		mPath = new Path();
-	}
-	
-	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		Log.i(TAG, "width = " + MeasureSpec.getSize(widthMeasureSpec)
-				+ "| height = " + MeasureSpec.getSize(heightMeasureSpec));
-	}
-		
-	public void onDraw(Canvas canvas){
-		canvas.drawColor(Color.WHITE);
-		mPath.reset();
-		mPath.moveTo(883, 215);		//开始起点
-		mPath.quadTo(432, 20, 432, 215);	// 控制点、终点
-		canvas.drawPath(mPath, mPaint);
-	}
+public class LandscapeBezierCurveView extends View {
+
+    private static final String TAG = LandscapeBezierCurveView.class.getSimpleName();
+
+    private Paint mPaint;
+
+    private Path mPath;
+    private int mWidth;
+    private int mHeight;
+
+    public LandscapeBezierCurveView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+    public LandscapeBezierCurveView(Context context) {
+        super(context);
+        init();
+    }
+
+    private void init() {
+        mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        mPaint.setAntiAlias(true);
+        mPaint.setStyle(Style.STROKE);
+        mPaint.setStrokeWidth(1);
+
+        mPath = new Path();
+    }
+
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mWidth = MeasureSpec.getSize(widthMeasureSpec);
+        mHeight = MeasureSpec.getSize(heightMeasureSpec);
+        Log.i(TAG, "width = " + mWidth + "| height = " + mHeight);
+    }
+
+    public void onDraw(Canvas canvas) {
+        canvas.drawColor(Color.TRANSPARENT);
+        mPath.reset();
+        mPath.moveTo(mWidth, mHeight);        //开始起点
+        mPath.quadTo(mWidth / 2 + 600, mHeight / 2 - 300, mWidth / 2, mHeight / 2);    // 控制点、终点
+        canvas.drawPath(mPath, mPaint);
+    }
 
 }

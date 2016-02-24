@@ -25,7 +25,7 @@
         <activity
             android:name="com.example.propertyanimsecdemo.LandscapeActivity"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             android:label="@string/title_activity_landscape" >
         </activity>
         <activity

@@ -4,35 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.propertyanimsecdemo.LandscapeActivity"
-    tools:ignore="MergeRootFrame" >
-    
-        <com.example.propertyanimsecdemo.LandscapeBezierCurveView
-        android:id="@+id/bezierView"        
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    
+    tools:ignore="MergeRootFrame">
+
+    <com.example.propertyanimsecdemo.LandscapeBezierCurveView
+        android:id="@+id/bezierView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Button
-        android:id="@+id/button1"        
+        android:id="@+id/send_flowers_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="送花" />       
-    
-    <ImageView 
+        android:layout_gravity="top|right"
+        android:text="  送花  " />
+
+    <ImageView
         android:id="@+id/flower"
-        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/icon_xiao_hua"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <ImageView 
+        android:visibility="gone" />
+
+    <ImageView
         android:id="@+id/number_im"
-        android:visibility="gone"
-        android:src="@drawable/lus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-    
-    
-    
-    </FrameLayout>
+        android:src="@drawable/lus"
+        android:visibility="gone" />
+
+
+</FrameLayout>
 

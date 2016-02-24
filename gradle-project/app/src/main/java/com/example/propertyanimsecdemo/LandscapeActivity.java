@@ -18,106 +18,123 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class LandscapeActivity extends Activity {
-	protected static final String TAG = "LandscapeActivity";
-	private ImageView mFlowerImg;
-	private ValueAnimator mValueAnimator;
-	private ImageView mNumberImg;
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_landscape);
-		
-		
-		mFlowerImg = (ImageView) findViewById(R.id.flower);
-		mNumberImg = (ImageView) findViewById(R.id.number_im);
-		
-		final Button button = (Button) findViewById(R.id.button1);		
-		button.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) {				
-				
-				ObjectAnimator anim1 = ObjectAnimator.ofFloat(mFlowerImg, "scaleX", 1.0f, 2f);
-				ObjectAnimator anim2 = ObjectAnimator.ofFloat(mFlowerImg, "scaleY", 1.0f, 2f);
-				AnimatorSet animSet = new AnimatorSet();
-				animSet.play(anim1).with(anim2).with(mValueAnimator);
-				animSet.setDuration(1500);
-				animSet.start();
+    protected static final String TAG = "LandscapeActivity";
+    private ImageView mFlowerImg;
+    private ValueAnimator mValueAnimator;
+    private ImageView mNumberImg;
+    private int mWidthPixels;
+    private int mHeightPixels;
 
-			}
-		});
-		mValueAnimator = ValueAnimator.ofObject(new BezierEvaluator(),new PointF(883,215), new PointF(432,215));//第一个pointF：开始点，第二个PointF：终点
-		mValueAnimator.addUpdateListener(new AnimatorUpdateListener() {
-			
-			@Override
-			public void onAnimationUpdate(ValueAnimator animation) {
-				PointF pointF = (PointF)animation.getAnimatedValue();
-				mFlowerImg.setX(pointF.x- mFlowerImg.getWidth()/2);
-				mFlowerImg.setY(pointF.y- mFlowerImg.getHeight()/2);
-			}
-		});
-		mValueAnimator.addListener(new AnimatorListenerAdapter() {
-			
-			@Override
-			public void onAnimationStart(Animator animation) {
-				Log.i(TAG, "onAnimationStart");
-				mFlowerImg.setVisibility(View.VISIBLE);
-			}
-			
-			@Override
-			public void onAnimationEnd(Animator animation) {
-				Log.i(TAG, "onAnimationEnd");
-				mFlowerImg.setVisibility(View.GONE);
-				
-				mNumberImg.setVisibility(View.VISIBLE);
-				
-				//数字加1动画：位移动画从指定坐标点移动到指定目标坐标点，并带有透明度变化
-				PropertyValuesHolder ofFloaty = PropertyValuesHolder.ofFloat("y", 215- mFlowerImg.getHeight()/2,215- mFlowerImg.getHeight()/2-50f);//Y坐标轴：第二个参数是起始点，第三个是结束点坐标，下行X轴同理
-				PropertyValuesHolder ofFloatx = PropertyValuesHolder.ofFloat("x", getResources().getDisplayMetrics().widthPixels/2+ mFlowerImg.getWidth()/2,getResources().getDisplayMetrics().widthPixels/2+ mFlowerImg.getWidth()/2);
-				PropertyValuesHolder ofFloat = PropertyValuesHolder.ofFloat("alpha", 1f,0.1f);//透明度，过渡到0.1f透明度
-				ObjectAnimator animEnd = ObjectAnimator.ofPropertyValuesHolder(mNumberImg,ofFloatx,ofFloaty,ofFloat);//创建objectAnimator对象
-				//目标对象变大，从X轴方向和Y轴方向
-				ObjectAnimator x = ObjectAnimator.ofFloat(mNumberImg, "scaleX",1.0f, 1.3f);
-				ObjectAnimator y = ObjectAnimator.ofFloat(mNumberImg, "scaleY",1.0f, 1.3f);
-				//动画集合，把多个动画组合到一起
-				AnimatorSet set = new AnimatorSet();
-				set.play(animEnd).with(x).with(y);
-				set.setDuration(900);
-				set.start();
-				set.addListener(new AnimatorListenerAdapter() {
-					@Override
-					public void onAnimationEnd(Animator animation) {
-						mNumberImg.setVisibility(View.GONE);
-					}
-				});
-			}
-		});
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_landscape);
 
-	class BezierEvaluator implements TypeEvaluator<PointF>{
 
-		@Override
-		public PointF evaluate(float fraction, PointF startValue, PointF endValue) {
-			final float t = fraction;	
-			Log.e(TAG, "fraction:"+fraction);
-			float oneMinusT = 1.0f - t;
-			PointF point = new PointF();	//返回计算好的点
-			
-			PointF point0 = startValue;	//开始出现的点
-			
-			PointF point1 = new PointF();	//贝塞尔曲线控制点
-			point1.set(getResources().getDisplayMetrics().widthPixels/2- mFlowerImg.getWidth(), 20);
-			
-			Log.i(TAG, "111x:"+(getResources().getDisplayMetrics().widthPixels/2- mFlowerImg.getWidth()));
-			Log.i(TAG, "111hhhhh:"+ mNumberImg.getHeight());
-			
-			PointF point3 = endValue;	//结束终点
-			
-			//B0(t) = (1-t)2P0 + 2(1-t)tC1 + t2P1    (0 ≤ t ≤ 1) 二次贝塞尔曲线方程
-			
-			point.x = oneMinusT*oneMinusT*(point0.x)+2*oneMinusT*t*(point1.x)+t*t*(point3.x);
-			point.y = oneMinusT*oneMinusT*(point0.y)+2*oneMinusT*t*(point1.y)+t*t*(point3.y);
-			return point;
-		}	
-	}
+        mFlowerImg = (ImageView) findViewById(R.id.flower);
+        mNumberImg = (ImageView) findViewById(R.id.number_im);
+
+
+        final Button sendFlowers = (Button) findViewById(R.id.send_flowers_bt);
+        sendFlowers.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //scale动画和贝塞尔曲线动画一起
+                ObjectAnimator scaleX = ObjectAnimator.ofFloat(mFlowerImg, "scaleX", 1.0f, 2f);
+                ObjectAnimator scaleY = ObjectAnimator.ofFloat(mFlowerImg, "scaleY", 1.0f, 2f);
+                AnimatorSet animSet = new AnimatorSet();
+                animSet.play(scaleX).with(scaleY).with(mValueAnimator);
+                animSet.setDuration(2000);
+                animSet.start();
+
+            }
+        });
+
+        //获取屏幕宽高
+        mWidthPixels = getResources().getDisplayMetrics().widthPixels;
+        mHeightPixels = getResources().getDisplayMetrics().heightPixels;
+        Log.i(TAG, "width:" + mWidthPixels + "   height:" + mHeightPixels);
+
+        mValueAnimator = ValueAnimator.ofObject(new BezierEvaluator()
+                , new PointF(mWidthPixels, mHeightPixels), new PointF(mWidthPixels / 2, mHeightPixels / 2));//第一个pointF：开始点，第二个PointF：终点
+        mValueAnimator.addUpdateListener(new AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                //根据计算好的点不断更新View的位置
+                PointF pointF = (PointF) animation.getAnimatedValue();
+                mFlowerImg.setX(pointF.x - mFlowerImg.getWidth() / 2);
+                mFlowerImg.setY(pointF.y - mFlowerImg.getHeight() / 2);
+            }
+        });
+        mValueAnimator.addListener(new AnimatorListenerAdapter() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Log.i(TAG, "onAnimationStart");
+                mFlowerImg.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Log.i(TAG, "onAnimationEnd");
+                mFlowerImg.setVisibility(View.GONE);
+
+                mNumberImg.setVisibility(View.VISIBLE);
+
+                //数字加1的动画效果组合有：位移动画从指定坐标点移动到指定目标坐标点，并带有透明度变化的属性动画
+                PropertyValuesHolder ofFloaty = PropertyValuesHolder
+                        .ofFloat("y", mHeightPixels / 2, mHeightPixels / 2 - 150f);//Y坐标轴：第二个参数是起始点，第三个是结束点坐标，下行X轴同理
+                PropertyValuesHolder ofFloatX = PropertyValuesHolder
+                        .ofFloat("x", mWidthPixels / 2, mWidthPixels / 2);
+
+                PropertyValuesHolder alphaProperty = PropertyValuesHolder.ofFloat("alpha", 1f, 0.1f);//设置透明度的动画属性，过渡到0.1f透明度
+                ObjectAnimator animEnd = ObjectAnimator.ofPropertyValuesHolder(mNumberImg, ofFloatX, ofFloaty, alphaProperty);//创建动画对象，把所有属性拼起来
+                //动画效果：目标View逐步变大，X轴和Y轴两个方向
+                ObjectAnimator x = ObjectAnimator.ofFloat(mNumberImg, "scaleX", 1.0f, 1.3f);
+                ObjectAnimator y = ObjectAnimator.ofFloat(mNumberImg, "scaleY", 1.0f, 1.3f);
+                //动画集合，把多个动画组合到一起
+                AnimatorSet set = new AnimatorSet();
+                set.play(animEnd).with(x).with(y);
+                set.setDuration(900);
+                set.start();
+                set.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mNumberImg.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    class BezierEvaluator implements TypeEvaluator<PointF> {
+
+        @Override
+        public PointF evaluate(float fraction, PointF startValue, PointF endValue) {
+            float oneMinusT = 1.0f - fraction;
+
+            //startValue;    //开始出现的点
+            //endValue;      //结束终点
+
+            PointF controlPoint = new PointF();    //贝塞尔曲线控制点
+            controlPoint.set(mWidthPixels / 2 + 600, mHeightPixels / 2 - 300);
+
+
+            //B0(t) = (1-t)2P0 + 2(1-t)tC1 + t2P1    (0 ≤ t ≤ 1) 二次贝塞尔曲线方程
+
+            PointF point = new PointF();    //返回计算好的点
+            point.x = oneMinusT * oneMinusT * (startValue.x) + 2 * oneMinusT * fraction * (controlPoint.x) + fraction * fraction * (endValue.x);
+            point.y = oneMinusT * oneMinusT * (startValue.y) + 2 * oneMinusT * fraction * (controlPoint.y) + fraction * fraction * (endValue.y);
+            return point;
+        }
+    }
 
 }
