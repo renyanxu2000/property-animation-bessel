@@ -29,3 +29,7 @@ gradle-project/app/build/*
 gradle-project/build/generated/mockable-android-23.jar
 
 gradle-project/gradle-project.iml
+
+gradle-project/app/app.iml
+
+gradle-project/app/app.iml
