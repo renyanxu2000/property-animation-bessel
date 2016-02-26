@@ -25,3 +25,7 @@ gradle-project/.idea/*
 
 gradle-project/app/build/*
 
+
+gradle-project/build/generated/mockable-android-23.jar
+
+gradle-project/gradle-project.iml
