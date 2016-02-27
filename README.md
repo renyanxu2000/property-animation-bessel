@@ -3,3 +3,6 @@
 
 
 ![](https://github.com/renyanxu2000/Property-Animation-Bessel-curve/blob/master/img/bessel.gif)
+
+
+![](https://github.com/renyanxu2000/Property-Animation-Bessel-curve/blob/master/img/bessel-2.gif)
